@@ -91,10 +91,7 @@ impl TryFrom<(&str, &str)> for Domain {
 
 #[cfg(test)]
 mod tests {
-    use crate::types::{
-        errors::{DomainChangerError, DomainChangerResult},
-        Domain,
-    };
+    use crate::types::{errors::DomainChangerResult, Domain};
 
     #[test]
     fn domain_tryfrom_test() {
