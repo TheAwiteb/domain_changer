@@ -61,7 +61,10 @@ impl Config {
     /// assert_eq!(my_config.old_hosts(), vec!["youtube.com", "twitter.com", "reddit.com"]);
     /// ```
     pub fn old_hosts(&self) -> Vec<&str> {
-        self.domains.iter().filter_map(|domain| domain.old.host_str()).collect()
+        self.domains
+            .iter()
+            .filter_map(|domain| domain.old.host_str())
+            .collect()
     }
 
     /// Returns all new host name of domains
@@ -80,9 +83,39 @@ impl Config {
     /// assert_eq!(my_config.new_hosts(), vec!["piped.kavin.rocks", "nitter.net", "libredd.it"]);
     /// ```
     pub fn new_hosts(&self) -> Vec<&str> {
-        self.domains.iter().filter_map(|domain| domain.new.host_str()).collect()
+        self.domains
+            .iter()
+            .filter_map(|domain| domain.new.host_str())
+            .collect()
     }
 
+    /// Returns reference [`Domain`] from [`domains`] by `old_host` if any
+    ///
+    /// [`domains`]: struct.Config.html#structfield.domains
+    /// [`Domain`]: struct.Domain.html
+    ///
+    /// # Example
+    /// ```rust
+    /// use domain_changer::types::{Config, Domain};
+    ///
+    /// let my_config = Config::new(vec![
+    ///     Domain::try_from(("https://youtube.com/", "https://piped.kavin.rocks/")).unwrap(),
+    ///     Domain::try_from(("https://twitter.com/", "https://nitter.net/")).unwrap(),
+    ///     Domain::try_from(("https://reddit.com/", "https://libredd.it/")).unwrap()
+    ///  ]);
+    ///
+    /// assert_eq!(my_config.get_by_old("youtube.com"), Some(&my_config.domains[0]));
+    /// assert_eq!(my_config.get_by_old("youtube"), None);
+    /// ```
+    pub fn get_by_old(&self, old_host: &str) -> Option<&Domain> {
+        self.domains.iter().find(|domain| {
+            if let Some(host) = domain.old.host_str() {
+                host == old_host
+            } else {
+                false
+            }
+        })
+    }
 }
 
 impl Default for Config {
@@ -95,8 +128,7 @@ impl Default for Config {
     fn default() -> Self {
         Self::new(vec![
             // Youtube domains
-            Domain::try_from(("https://youtube.com/", "https://piped.kavin.rocks/"))
-                .unwrap(),
+            Domain::try_from(("https://youtube.com/", "https://piped.kavin.rocks/")).unwrap(),
             Domain::try_from(("https://youtu.be/", "https://piped.kavin.rocks/")).unwrap(),
             // Twitter domains
             Domain::try_from(("https://t.co/", "https://nitter.net/")).unwrap(),
