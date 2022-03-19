@@ -89,6 +89,12 @@ impl TryFrom<(&str, &str)> for Domain {
     }
 }
 
+impl PartialEq for Domain {
+    fn eq(&self, other: &Self) -> bool {
+        self.old == other.old && self.new == other.new
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::types::{errors::DomainChangerResult, Domain};
