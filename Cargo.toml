@@ -4,12 +4,13 @@ version = "0.1.0"
 edition = "2021"
 authors = ["TheAwiteb <awiteb@hotmail.com>"]
 keywords = ["domain", "privacy", "changer", "domain-changer"]
-license-file = "LICENSE"
 license = "AGPL-3.0-only"
 homepage = "https://github.com/TheAwiteb/domain_changer"
 repository = "https://github.com/TheAwiteb/domain_changer.git"
 readme = "README.md"
+description="Rust library that helps you change the domain of the link to another domain"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+url = "2.2.2"
