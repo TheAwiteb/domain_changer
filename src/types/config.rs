@@ -116,6 +116,27 @@ impl Config {
             }
         })
     }
+
+    /// Use [`Domain.contain`] with all domains
+    ///
+    /// # Note
+    /// Return first domain not all (by [`old`])
+    ///
+    /// # Example
+    /// ```rust
+    /// use domain_changer::types::Config;
+    ///
+    /// let config: Config = Config::default();
+    /// assert!(config.contain("google.com", true).is_none());
+    /// assert!(config.contain("youtube.com", true).is_some());
+    /// assert!(config.contain("https://libredd.it", false).is_some());
+    /// ```
+    ///
+    /// [`old`]: struct.Domain.html#structfield.old
+    /// [`Domain.contain`]: struct.Domain.html#method.contain
+    pub fn contain(&self, word: &str, just_old: bool) -> Option<&Domain> {
+        self.domains.iter().find(|domain| domain.contain(word, just_old).is_some())
+    }
 }
 
 impl Default for Config {
