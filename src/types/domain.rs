@@ -23,7 +23,7 @@ use url::Url;
 /// [`Domain`]: struct.Domain.html
 /// [`new`]: struct.Domain.html#structfield.new
 /// [`old`]: struct.Domain.html#structfield.old
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Domain {
     /// old domain to change it
     pub old: Url,
