@@ -129,6 +129,7 @@ impl Default for Config {
         Self::new(vec![
             // Youtube domains
             Domain::try_from(("https://youtube.com/", "https://piped.kavin.rocks/")).unwrap(),
+            Domain::try_from(("https://www.youtube.com/", "https://piped.kavin.rocks/")).unwrap(),
             Domain::try_from(("https://youtu.be/", "https://piped.kavin.rocks/")).unwrap(),
             // Twitter domains
             Domain::try_from(("https://t.co/", "https://nitter.net/")).unwrap(),
