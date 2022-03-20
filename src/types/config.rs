@@ -135,7 +135,9 @@ impl Config {
     /// [`old`]: struct.Domain.html#structfield.old
     /// [`Domain.contain`]: struct.Domain.html#method.contain
     pub fn contain(&self, word: &str, just_old: bool) -> Option<&Domain> {
-        self.domains.iter().find(|domain| domain.contain(word, just_old).is_some())
+        self.domains
+            .iter()
+            .find(|domain| domain.contain(word, just_old).is_some())
     }
 }
 
