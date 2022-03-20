@@ -19,6 +19,7 @@ use crate::types::Domain;
 ///
 /// [`Config`]: struct.Config.html
 /// [`Domain`]: struct.Domain.html
+#[derive(Debug, Clone)]
 pub struct Config {
     pub domains: Vec<Domain>,
 }
