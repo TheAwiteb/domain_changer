@@ -1,5 +1,4 @@
-//!  Rust library that helps you change the domain of the link to another domain, the library helps with privacy.
-//! It can be used to change the domain of sites that do not care about privacy to another that does.
+#![doc = include_str!("../README.md")]
 
 //     Rust library that helps you change the domain of the link to another domain
 //      Copyright (C) 2022  TheAwiteb <awiteb@hotmail.com>
