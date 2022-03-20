@@ -51,6 +51,47 @@ impl Domain {
     pub fn new(old: Url, new: Url) -> Self {
         Self { old, new }
     }
+
+    /// Returns the [`Url`] if `word` is url and is in the domain
+    /// check [`old`] only if `just_old` is [`true`]
+    ///
+    /// # Example
+    /// ```rust
+    /// use domain_changer::types::Domain;
+    /// use url::Url;
+    ///
+    /// let domain: Domain = Domain::new(
+    ///     Url::parse("https://youtube.com").unwrap(),
+    ///     Url::parse("https://piped.kavin.rocks").unwrap(),
+    /// );
+    ///
+    /// assert!(domain.contain("youtube.com", true).is_some());
+    /// assert!(domain.contain("piped.kavin.rocks", true).is_none());
+    /// assert!(domain.contain("piped.kavin.rocks", false).is_some());
+    /// ```
+    ///
+    /// [`old`]: struct.Domain.html#structfield.old
+    pub fn contain(&self, word: &str, just_old: bool) -> Option<Url> {
+        let host_with_https: String = "https://".to_owned() + word;
+        if let Ok(url) = Url::parse(
+            if word.starts_with("https://") || word.starts_with("http://") {
+                word
+            } else {
+                &host_with_https
+            },
+        ) {
+            if let Some(str_host) = url.host_str() {
+                if self.old.has_host() && (self.old.host_str().unwrap() == str_host)
+                    || !just_old
+                        && self.new.has_host()
+                        && (self.new.host_str().unwrap() == str_host)
+                {
+                    return Some(url);
+                }
+            }
+        }
+        None
+    }
 }
 
 impl TryFrom<(&str, &str)> for Domain {
