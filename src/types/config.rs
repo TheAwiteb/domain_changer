@@ -16,9 +16,7 @@
 use crate::types::Domain;
 
 /// [`Config`] struct help you to manage domains with [`Domain`] struct
-///
-/// [`Config`]: struct.Config.html
-/// [`Domain`]: struct.Domain.html
+#[derive(Debug, Clone)]
 pub struct Config {
     pub domains: Vec<Domain>,
 }
@@ -40,7 +38,6 @@ impl Config {
     /// assert_eq!(my_config.domains[1].new.as_str(), "https://nitter.net/");
     /// ```
     ///
-    /// [`Config`]: struct.Config.html
     pub fn new(domains: Vec<Domain>) -> Self {
         Self { domains }
     }
@@ -91,8 +88,7 @@ impl Config {
 
     /// Returns reference [`Domain`] from [`domains`] by `old_host` if any
     ///
-    /// [`domains`]: struct.Config.html#structfield.domains
-    /// [`Domain`]: struct.Domain.html
+    /// [`domains`]: Config#structfield.domains
     ///
     /// # Example
     /// ```rust
@@ -132,8 +128,8 @@ impl Config {
     /// assert!(config.contain("https://libredd.it", false).is_some());
     /// ```
     ///
-    /// [`old`]: struct.Domain.html#structfield.old
-    /// [`Domain.contain`]: struct.Domain.html#method.contain
+    /// [`old`]: Domain#structfield.old
+    /// [`Domain.contain`]: method@Domain::contain
     pub fn contain(&self, word: &str, just_old: bool) -> Option<&Domain> {
         self.domains
             .iter()
@@ -147,7 +143,6 @@ impl Default for Config {
     /// [nitter](https://nitter.net/),
     /// [libredd](https://libredd.it/)
     ///
-    /// [`Config`]: struct.Config.html
     fn default() -> Self {
         Self::new(vec![
             // Youtube domains

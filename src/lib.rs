@@ -1,5 +1,4 @@
-//!  Rust library that helps you change the domain of the link to another domain, the library helps with privacy.
-//! It can be used to change the domain of sites that do not care about privacy to another that does.
+#![doc = include_str!("../README.md")]
 
 //     Rust library that helps you change the domain of the link to another domain
 //      Copyright (C) 2022  TheAwiteb <awiteb@hotmail.com>
@@ -26,10 +25,10 @@ use types::{Config, Domain};
 /// use domain_changer::parse_string;
 /// use domain_changer::types::Config;
 ///
-/// let text: String = "Wellcome to my youtube channel: https://www.youtube.com/channel/UCeRbJsc8cl7xBwT3jIxaAdg And my twitter is: twitter.com/Awiteb".to_string();
+/// let text: String = "Welcome to my youtube channel: https://www.youtube.com/channel/UCeRbJsc8cl7xBwT3jIxaAdg And my twitter is: twitter.com/Awiteb".to_string();
 /// let config: Config = Config::default();
 /// assert_eq!(parse_string(&config, text),
-///     "Wellcome to my youtube channel: https://piped.kavin.rocks/channel/UCeRbJsc8cl7xBwT3jIxaAdg And my twitter is: https://nitter.net/Awiteb".to_string()
+///     "Welcome to my youtube channel: https://piped.kavin.rocks/channel/UCeRbJsc8cl7xBwT3jIxaAdg And my twitter is: https://nitter.net/Awiteb".to_string()
 ///     );
 /// ```
 pub fn parse_string(config: &Config, text: String) -> String {
