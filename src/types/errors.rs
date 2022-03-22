@@ -18,17 +18,15 @@
 pub enum DomainChangerError {
     /// Error mean the [`old`] domain is invalid
     ///
-    /// [`old`]: struct.Domain.html#structfield.old
+    /// [`old`]: crate::types::Domain#structfield.old
     InvalidOldDomain(String),
     /// Error mean the [`new`] domain is invalid
     ///
-    /// [`new`]: struct.Domain.html#structfield.new
+    /// [`new`]: crate::types::Domain#structfield.new
     InvalidNewDomain(String),
 }
 
 /// [`Result`] contain [`DomainChangerError`]
-///
-/// [`DomainChangerError`]: enum.DomainChangerError.html
 pub type DomainChangerResult<T> = Result<T, DomainChangerError>;
 
 impl DomainChangerError {
@@ -42,7 +40,7 @@ impl DomainChangerError {
     /// assert!(!InvalidNewDomain("error msg".to_owned()).is_invalid_old_domain());
     /// ```
     ///
-    /// [`InvalidOldDomain`]: #variant.InvalidOldDomain
+    /// [`InvalidOldDomain`]: enum@DomainChangerError#variant.InvalidOldDomain
     pub fn is_invalid_old_domain(&self) -> bool {
         matches!(self, DomainChangerError::InvalidOldDomain(_))
     }
@@ -56,7 +54,7 @@ impl DomainChangerError {
     /// assert!(!InvalidOldDomain("error msg".to_owned()).is_invalid_new_domain());
     /// ```
     ///
-    /// [`InvalidNewDomain`]: #variant.InvalidNewDomain
+    /// [`InvalidNewDomain`]: enum@DomainChangerError#variant.InvalidNewDomain
     pub fn is_invalid_new_domain(&self) -> bool {
         matches!(self, DomainChangerError::InvalidNewDomain(_))
     }

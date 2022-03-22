@@ -20,9 +20,8 @@ use url::Url;
 ///
 /// [`old`] is old domain you want to chang it to [`new`]
 ///
-/// [`Domain`]: struct.Domain.html
-/// [`new`]: struct.Domain.html#structfield.new
-/// [`old`]: struct.Domain.html#structfield.old
+/// [`new`]: Domain#structfield.new
+/// [`old`]: Domain#structfield.old
 #[derive(Debug, Clone)]
 pub struct Domain {
     /// old domain to change it
@@ -46,8 +45,6 @@ impl Domain {
     /// assert_eq!(foo.new.domain(), Some("piped.kavin.rocks"));
     /// assert_eq!(foo.old.domain(), Some("youtube.com"));
     /// ```
-    ///
-    /// [`Domain`]: struct.Domain.html
     pub fn new(old: Url, new: Url) -> Self {
         Self { old, new }
     }
@@ -70,7 +67,7 @@ impl Domain {
     /// assert!(domain.contain("piped.kavin.rocks", false).is_some());
     /// ```
     ///
-    /// [`old`]: struct.Domain.html#structfield.old
+    /// [`old`]: Domain#structfield.old
     pub fn contain(&self, word: &str, just_old: bool) -> Option<Url> {
         let host_with_https: String = "https://".to_owned() + word;
         if let Ok(url) = Url::parse(
@@ -111,7 +108,6 @@ impl TryFrom<(&str, &str)> for Domain {
     /// assert_eq!(foo.old.domain(), Some("youtube.com"));
     /// ```
     ///
-    /// [`Domain`]: struct.Domain.html
     fn try_from(domains: (&str, &str)) -> DomainChangerResult<Self> {
         Ok(Self {
             old: Url::parse(domains.0).map_err(|_| {
