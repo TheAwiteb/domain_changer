@@ -22,7 +22,7 @@ use url::Url;
 ///
 /// [`new`]: Domain#structfield.new
 /// [`old`]: Domain#structfield.old
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Domain {
     /// old domain to change it
     pub old: Url,
@@ -123,12 +123,6 @@ impl TryFrom<(&str, &str)> for Domain {
                 ))
             })?,
         })
-    }
-}
-
-impl PartialEq for Domain {
-    fn eq(&self, other: &Self) -> bool {
-        self.old == other.old && self.new == other.new
     }
 }
 

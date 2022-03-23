@@ -16,7 +16,7 @@
 use crate::types::Domain;
 
 /// [`Config`] struct help you to manage domains with [`Domain`] struct
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Config {
     pub domains: Vec<Domain>,
 }
