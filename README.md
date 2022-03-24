@@ -50,14 +50,41 @@ assert_eq!(
 );
 ```
 
+### Serialize and Deserialize
+Serialize and deserialize from/to json in Domain struct and Config
+#### Domain
+```rust
+use domain_changer::types::{Domain, ToFromJson};
+
+let domain: Domain = Domain::try_from(("https://twitter.com/", "https://nitter.net/")).unwrap();
+assert_eq!(domain.to_json().unwrap(), "{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}");
+assert_eq!(Domain::from_json("{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}").unwrap(), domain);
+assert!(Domain::from_json("{\"old\":\"twitter.com/\",\"new\":\"nitter.net/\"}").is_err());
+```
+#### Config
+```rust
+use domain_changer::types::{Config, Domain, ToFromJson};
+
+let config: Config = Config::new(vec![Domain::try_from(("https://twitter.com/", "https://nitter.net/")).unwrap()]);
+assert_eq!(
+    config.to_json().unwrap(),
+    "{\"domains\":[{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}]}".to_string()
+);
+
+assert_eq!(
+    Config::from_json("{\"domains\":[{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}]}").unwrap(),
+    config
+);
+```
+
 ## Donating
 
-| Currency                  |                Address                          |
-|---------------------------|------------------------------------------------ |
-| Binance **BNB BEP20**     | ```0xD89c146B03B72191be91064D313610981dCAF6d4```|
-| USD Coin **USDC BEP20**   | ```0xD89c146B03B72191be91064D313610981dCAF6d4``` |
-| Bitcoin **BTC**           | ```bc1q0ltmqmsc4qs740ssyf9k9jq99nwxtqu8aupmdj```|
-| Bitcoin Cash **BCH**      | ```qrpm6zyte3d4z2u9r24l04m3havc2wd9vgqlz8sjgr```|
+| Currency                | Address                                          |
+|-------------------------|--------------------------------------------------|
+| Binance **BNB BEP20**   | ```0xD89c146B03B72191be91064D313610981dCAF6d4``` |
+| USD Coin **USDC BEP20** | ```0xD89c146B03B72191be91064D313610981dCAF6d4``` |
+| Bitcoin **BTC**         | ```bc1q0ltmqmsc4qs740ssyf9k9jq99nwxtqu8aupmdj``` |
+| Bitcoin Cash **BCH**    | ```qrpm6zyte3d4z2u9r24l04m3havc2wd9vgqlz8sjgr``` |
 
 ## Contributors
 <a href="https://github.com/TheAwiteb/domain_changer/graphs/contributors">

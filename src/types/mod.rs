@@ -18,4 +18,8 @@
 mod config;
 mod domain;
 pub mod errors;
+#[cfg(feature = "json")]
+mod traits;
+#[cfg(feature = "json")]
+pub use traits::ToFromJson;
 pub use {config::Config, domain::Domain};

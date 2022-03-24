@@ -54,9 +54,9 @@ jobs:
 
         include:
           - rust: stable
-            features: "--features full"
+            features: "--all-features"
           - rust: beta
-            features: "--features full"
+            features: "--all-features"
           - rust: nightly
             features: "--all-features"
 
@@ -78,3 +78,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
+          args: "--all-features"
