@@ -15,6 +15,10 @@
 
 use super::errors::{DomainChangerError, DomainChangerResult};
 use url::Url;
+#[cfg(feature = "json")]
+use serde::{Deserialize, Serialize};
+#[cfg(feature = "json")]
+use super::ToFromJson;
 
 /// [`Domain`] struct help you to put [`old`] and [`new`] domain
 ///
@@ -22,6 +26,7 @@ use url::Url;
 ///
 /// [`new`]: Domain#structfield.new
 /// [`old`]: Domain#structfield.old
+#[cfg_attr(feature = "json", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Domain {
     /// old domain to change it
@@ -90,6 +95,22 @@ impl Domain {
         None
     }
 }
+
+/// Implementation [`ToFromJson`] to [`Domain`]
+///
+/// # Example
+/// ```rust
+/// use domain_changer::types::{Domain, ToFromJson};
+///
+/// let domain: Domain = Domain::try_from(("https://twitter.com/", "https://nitter.net/")).unwrap();
+/// assert_eq!(domain.to_json().unwrap(), "{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}");
+/// assert_eq!(Domain::from_json("{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}").unwrap(), domain);
+/// assert!(Domain::from_json("{\"old\":\"twitter.com/\",\"new\":\"nitter.net/\"}").is_err())
+///
+///
+/// ```
+#[cfg(feature = "json")]
+impl ToFromJson<'_> for Domain {}
 
 impl TryFrom<(&str, &str)> for Domain {
     type Error = DomainChangerError;
