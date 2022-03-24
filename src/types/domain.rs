@@ -14,11 +14,11 @@
 // with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 use super::errors::{DomainChangerError, DomainChangerResult};
-use url::Url;
-#[cfg(feature = "json")]
-use serde::{Deserialize, Serialize};
 #[cfg(feature = "json")]
 use super::ToFromJson;
+#[cfg(feature = "json")]
+use serde::{Deserialize, Serialize};
+use url::Url;
 
 /// [`Domain`] struct help you to put [`old`] and [`new`] domain
 ///

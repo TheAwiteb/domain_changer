@@ -10,7 +10,7 @@ use serde_json::{from_str, to_string, Result as SerdeResult};
 #[cfg(feature = "json")]
 pub trait ToFromJson<'de>
 where
-    Self: Sized + Serialize + Deserialize<'de>
+    Self: Sized + Serialize + Deserialize<'de>,
 {
     /// [`Deserialize`] struct from json with [`serde_json::from_str`]
     fn from_json(json: &'de str) -> SerdeResult<Self> {

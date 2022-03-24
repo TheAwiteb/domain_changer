@@ -20,6 +20,6 @@ mod domain;
 pub mod errors;
 #[cfg(feature = "json")]
 mod traits;
-pub use {config::Config, domain::Domain};
 #[cfg(feature = "json")]
 pub use traits::ToFromJson;
+pub use {config::Config, domain::Domain};

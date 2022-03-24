@@ -13,11 +13,11 @@
 // You should have received a copy of the GNU Affero General Public License along
 // with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#[cfg(feature = "json")]
+use super::ToFromJson;
 use crate::types::Domain;
 #[cfg(feature = "json")]
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "json")]
-use super::ToFromJson;
 
 /// [`Config`] struct help you to manage domains with [`Domain`] struct
 #[cfg_attr(feature = "json", derive(Serialize, Deserialize))]
