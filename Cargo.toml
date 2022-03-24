@@ -1,6 +1,6 @@
 [package]
 name = "domain_changer"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["TheAwiteb <awiteb@hotmail.com>"]
 keywords = ["domain", "privacy", "changer", "domain-changer"]
