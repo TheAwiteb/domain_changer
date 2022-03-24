@@ -50,8 +50,9 @@ assert_eq!(
 );
 ```
 
-### Serialize and Deserialize
+### Serialize and Deserialize (json feature)
 Serialize and deserialize from/to json in Domain struct and Config
+> Note: Need `json` feature
 #### Domain
 ```rust
 use domain_changer::types::{Domain, ToFromJson};
