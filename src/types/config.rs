@@ -14,8 +14,13 @@
 // with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::types::Domain;
+#[cfg(feature = "json")]
+use serde::{Deserialize, Serialize};
+#[cfg(feature = "json")]
+use super::ToFromJson;
 
 /// [`Config`] struct help you to manage domains with [`Domain`] struct
+#[cfg_attr(feature = "json", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Config {
     pub domains: Vec<Domain>,
@@ -136,6 +141,28 @@ impl Config {
             .find(|domain| domain.contain(word, just_old).is_some())
     }
 }
+
+/// Implementation [`ToFromJson`] to [`Config`]
+///
+/// # Example
+/// ```rust
+/// use domain_changer::types::{Config, Domain, ToFromJson};
+///
+/// let config: Config = Config::new(vec![Domain::try_from(("https://twitter.com/", "https://nitter.net/")).unwrap()]);
+/// assert_eq!(
+///     config.to_json().unwrap(),
+///     "{\"domains\":[{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}]}".to_string()
+/// );
+///
+/// assert_eq!(
+///     Config::from_json("{\"domains\":[{\"old\":\"https://twitter.com/\",\"new\":\"https://nitter.net/\"}]}").unwrap(),
+///     config
+/// )
+///
+///
+/// ```
+#[cfg(feature = "json")]
+impl ToFromJson<'_> for Config {}
 
 impl Default for Config {
     /// Default instance of [`Config`] is the most popular privacy sites
