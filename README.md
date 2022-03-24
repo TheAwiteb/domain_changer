@@ -32,7 +32,7 @@ assert_eq!(parse_string(&config, text),
 ```
 
 ### Extract Domains
-You can extract domains domains from string if any (Just the domain you add it to config)
+You can extract domains from string if any (Just the domain you add it to config)
 ```rust
 use domain_changer::extract_old_domains;
 use domain_changer::types::{Config, Domain};
