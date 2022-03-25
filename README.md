@@ -5,7 +5,7 @@
   <a href="https://docs.rs/domain_changer/latest/domain_changer/">
     <img src="https://img.shields.io/badge/docs-docs.rs-orange">
   </a>
-  <a href="https://crates.io/crates/teloxide">
+  <a href="https://crates.io/crates/domain_changer">
     <img src="https://img.shields.io/crates/v/domain_changer.svg">
   </a>
  <a href="https://rust-reportcard.xuri.me/report/github.com/TheAwiteb/domain_changer">
@@ -50,8 +50,9 @@ assert_eq!(
 );
 ```
 
-### Serialize and Deserialize
+### Serialize and Deserialize (json feature)
 Serialize and deserialize from/to json in Domain struct and Config
+> Note: Need `json` feature
 #### Domain
 ```rust
 use domain_changer::types::{Domain, ToFromJson};
